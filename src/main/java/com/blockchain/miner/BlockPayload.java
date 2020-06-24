@@ -15,4 +15,15 @@ public class BlockPayload {
 	private void setPayloadMap(Map<String, String> payloadMap) {
 		this.payloadMap = payloadMap;
 	}
+
+	public Map<String, String> getPayloadMap() {
+		return payloadMap;
+	}
+
+	@Override
+	public String toString() {
+		return "BlockPayload{" +
+			"payloadMap=" + payloadMap +
+			'}';
+	}
 }
