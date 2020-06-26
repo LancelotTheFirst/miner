@@ -11,7 +11,7 @@ public class MiningEngine {
 	private BlockChainStorage storage;
 	private BlockChain blockChain;
 	private BlockPayloadService blockPayloadService;
-	private static final int N_ZEROS = 5;
+	private static final int N_ZEROS = 2;
 
 	public static MiningEngine initializeFromStorage(BlockChainStorage blockChainStorage,
 													 BlockPayloadService blockPayloadService) {
@@ -39,8 +39,13 @@ public class MiningEngine {
 		BlockPayload payload = blockPayloadService.getPayloadForBlock();
 		logger.info("Received payload for new block: " + payload.toString());
 		Block block = Block.from(payload);
+
+		logger.info(block.getData().toString());
+		logger.info(block.getHash().toString());
+
 		block = transformBlockToReachDesiredHashSum(block);
-		logger.info("Created desired block with hash: " + Arrays.toString(block.getHash().getHash()) + " and nonce: " + block.getNonce());
+		logger.info("Created desired block with hash: " + block.getHash().toString() + " and nonce: " + block.getNonce());
+
 		//TODO add to block chain and go on
 
 		//TODO start building until successful build or another miner sent his block
@@ -48,6 +53,7 @@ public class MiningEngine {
 
 	private Block transformBlockToReachDesiredHashSum(Block block) throws HashCalculationException {
 		while (true) {
+			logger.info("Hash: " + block.getHash().toString());
 			if (block.getHash().isDesired(N_ZEROS)) {
 				return block;
 			} else {

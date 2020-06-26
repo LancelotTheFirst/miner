@@ -4,20 +4,21 @@ import org.slf4j.*;
 
 import java.nio.charset.StandardCharsets;
 import java.security.*;
+import java.util.Arrays;
 
 public class Hash {
 
 	private static final Logger logger = LoggerFactory.getLogger(Hash.class);
-	private byte[] hash;
+	private char[] hexHashChars;
 
 	public static Hash from(Block block) throws HashCalculationException {
-		byte[] hashBytes = calculateHash(block);
+		char[] hashChars = calculateHash(block);
 		Hash hash = new Hash();
-		hash.setHash(hashBytes);
+		hash.setHexHashChars(hashChars);
 		return hash;
 	}
 
-	private static byte[] calculateHash(Block block) throws HashCalculationException {
+	private static char[] calculateHash(Block block) throws HashCalculationException {
 		MessageDigest digest;
 		try {
 			digest = MessageDigest.getInstance("SHA-256");
@@ -26,21 +27,24 @@ public class Hash {
 			logger.error(message);
 			throw new HashCalculationException(message, e);
 		}
-		return digest.digest(
+		byte[] hashBytes =  digest.digest(
 			block.getData().toString().getBytes(StandardCharsets.UTF_8));
+		return bytesToHex(hashBytes);
 	}
 
-	public void setHash(byte[] hash) {
-		this.hash = hash;
-	}
-
-	public byte[] getHash() {
-		return hash;
+	private static char[] bytesToHex(byte[] hash) {
+		StringBuilder hexString = new StringBuilder();
+		for (int i = 0; i < hash.length; i++) {
+			String hex = Integer.toHexString(0xff & hash[i]);
+			if(hex.length() == 1) hexString.append('0');
+			hexString.append(hex);
+		}
+		return hexString.toString().toCharArray();
 	}
 
 	public boolean isDesired(int nZeros) {
 		for (int i = 0; i < nZeros; i++) {
-			if (hash[i] != 0) {
+			if (hexHashChars[i] != 0) {
 				return false;
 			}
 		}
@@ -48,7 +52,15 @@ public class Hash {
 	}
 
 	public void recalculateHash(Block block) throws HashCalculationException {
-		this.hash = calculateHash(block);
+		this.hexHashChars = calculateHash(block);
 	}
 
+	public void setHexHashChars(char[] hexHashChars) {
+		this.hexHashChars = hexHashChars;
+	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(hexHashChars);
+	}
 }
