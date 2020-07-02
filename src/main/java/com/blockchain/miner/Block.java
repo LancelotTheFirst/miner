@@ -8,9 +8,11 @@ public class Block {
 
 	private static final Logger logger = LoggerFactory.getLogger(Block.class);
 	private static final String NONCE_MAP_KEY_NAME = "nonce";
+	private static final String LAST_BLOCK_KEY_NAME = "last_block_hash";
 	private Map<String, String> data;
 	private long nonce = 0;
 	private Hash hash;
+	private boolean isMined = false;
 
 	public static Block from(BlockPayload payload) throws HashCalculationException {
 		Block block = new Block();
@@ -43,5 +45,17 @@ public class Block {
 
 	public Hash getHash() {
 		return hash;
+	}
+
+	public void addHashOfLastBlock(Hash hash) {
+		data.put(LAST_BLOCK_KEY_NAME, hash.toString());
+	}
+
+	public boolean isMined() {
+		return isMined;
+	}
+
+	public void setMined(boolean mined) {
+		isMined = mined;
 	}
 }

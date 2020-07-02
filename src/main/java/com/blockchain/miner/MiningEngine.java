@@ -2,11 +2,10 @@ package com.blockchain.miner;
 
 import org.slf4j.*;
 
-import java.util.Arrays;
-
 public class MiningEngine {
 
 	private static final Logger logger = LoggerFactory.getLogger(MiningEngine.class);
+	private static final int TEN_SECONDS = 10;
 
 	private BlockChainStorage storage;
 	private BlockChain blockChain;
@@ -36,26 +35,45 @@ public class MiningEngine {
 	}
 
 	public void start() throws HashCalculationException {
-		BlockPayload payload = blockPayloadService.getPayloadForBlock();
-		logger.info("Received payload for new block: " + payload.toString());
-		Block block = Block.from(payload);
+		while (true) {
+			BlockPayload payload = blockPayloadService.getPayloadForBlock();
+			logger.info("Received payload for new block: " + payload.toString());
+			Block block = Block.from(payload);
+			while (true) {
+				mineThisBlockForTimeInSeconds(block, TEN_SECONDS);
 
-		logger.info(block.getData().toString());
-		logger.info(block.getHash().toString());
+				// go to the income data repository to check for blocks
 
-		block = transformBlockToReachDesiredHashSum(block);
-		logger.info("Created desired block with hash: " + block.getHash().toString() + " and nonce: " + block.getNonce());
+				// check
+				// add external if exists
+					// break
+				if (block.isMined()) {
+					blockChain.addBlock(block);
+					break;
+				}
+				// mine for some time
+				// check for another miner block
+				// if received block than add it to chain and start from scratch
+				// go on
+			}
 
-		//TODO add to block chain and go on
 
-		//TODO start building until successful build or another miner sent his block
+
+			blockChain.addBlock(block);
+			logger.info("Created desired block with hash: " + block.getHash().toString() + " and nonce: " + block.getNonce());
+		}
+
+		// TODO notify
 	}
 
-	private Block transformBlockToReachDesiredHashSum(Block block) throws HashCalculationException {
-		while (true) {
+	private void mineThisBlockForTimeInSeconds(Block block, int seconds) throws HashCalculationException {
+		long current = System.currentTimeMillis();
+		long end = current + seconds * 1000;
+		while(System.currentTimeMillis() < end) {
 			logger.info("Hash: " + block.getHash().toString());
 			if (block.getHash().isDesired(N_ZEROS)) {
-				return block;
+				block.setMined(true);
+				return;
 			} else {
 				block.transformToCauseHashChange();
 			}
