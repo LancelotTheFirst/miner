@@ -28,10 +28,10 @@ public class IncomeController {
 		} catch (RequiredIncomeDataEmptyException e) {
 			logger.error("Node with address: " + message.getNodeAddress() + " sent this required fields:" +
 				e.getEmptyFieldNames() + " as empty");
-			return HandleBlockCreatedResult.from(e);
+			result = HandleBlockCreatedResult.from(e);
 		} catch (Exception e) {
 			logger.error("Error while handling income block created notification from node with address: " + message.getNodeAddress());
-			return HandleBlockCreatedResult.from(e);
+			result = HandleBlockCreatedResult.from(e);
 		}
 		return result;
 	}
@@ -41,7 +41,7 @@ public class IncomeController {
 		if (message.getNodeAddress() == null || message.getNodeAddress().isEmpty()) {
 			emptyFieldNames.add("Node Address");
 		}
-		if (message.getPayload() == null || message.getPayload().isEmpty()) {
+		if (message.getBlockData() == null || message.getBlockData().isEmpty()) {
 			emptyFieldNames.add("Payload");
 		}
 		if (!emptyFieldNames.isEmpty()) {

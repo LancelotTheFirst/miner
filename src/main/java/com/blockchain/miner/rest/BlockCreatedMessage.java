@@ -5,7 +5,7 @@ import java.util.Map;
 public class BlockCreatedMessage {
 
 	private String nodeAddress;
-	private Map<String, String> payload;
+	private Map<String, String> blockData;
 
 	public String getNodeAddress() {
 		return nodeAddress;
@@ -15,11 +15,11 @@ public class BlockCreatedMessage {
 		this.nodeAddress = nodeAddress;
 	}
 
-	public Map<String, String> getPayload() {
-		return payload;
+	public Map<String, String> getBlockData() {
+		return blockData;
 	}
 
-	public void setPayload(Map<String, String> payload) {
-		this.payload = payload;
+	public void setBlockData(Map<String, String> blockData) {
+		this.blockData = blockData;
 	}
 }

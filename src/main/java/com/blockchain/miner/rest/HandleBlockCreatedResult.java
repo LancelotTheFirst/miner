@@ -21,6 +21,12 @@ public class HandleBlockCreatedResult {
 		return result;
 	}
 
+	public static HandleBlockCreatedResult success() {
+		HandleBlockCreatedResult result = new HandleBlockCreatedResult();
+		result.setStatus(SUCCESS_STATUS);
+		return result;
+	}
+
 	public String getStatus() {
 		return status;
 	}
