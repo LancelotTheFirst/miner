@@ -1,10 +1,9 @@
-package com.blockchain.miner;
+package com.blockchain.miner.domain;
 
 import org.slf4j.*;
 
 import java.nio.charset.StandardCharsets;
 import java.security.*;
-import java.util.Arrays;
 
 public class Hash {
 

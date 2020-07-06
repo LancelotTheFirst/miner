@@ -1,4 +1,4 @@
-package com.blockchain.miner.rest;
+package com.blockchain.miner.controller;
 
 public class HandleBlockCreatedResult {
 

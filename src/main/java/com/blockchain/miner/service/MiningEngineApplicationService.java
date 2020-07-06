@@ -1,5 +1,7 @@
-package com.blockchain.miner;
+package com.blockchain.miner.service;
 
+import com.blockchain.miner.domain.*;
+import com.blockchain.miner.repository.BlockChainRepository;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -7,12 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class MiningEngineApplicationService {
 
-	private BlockChainStorage blockChainStorage;
+	private BlockChainRepository blockChainRepository;
 	private BlockPayloadService blockPayloadService;
 	private static final Logger logger = LoggerFactory.getLogger(MiningEngineApplicationService.class);
 
 	public void start() {
-		MiningEngine miningEngine = MiningEngine.initializeFromStorage(blockChainStorage, blockPayloadService);
+		MiningEngine miningEngine = MiningEngine.initializeFromRepository(blockChainRepository, blockPayloadService);
 		try {
 			miningEngine.start();
 		} catch (HashCalculationException e) {
@@ -23,8 +25,8 @@ public class MiningEngineApplicationService {
 	}
 
 	@Autowired
-	public void setBlockChainStorage(BlockChainStorage blockChainStorage) {
-		this.blockChainStorage = blockChainStorage;
+	public void setBlockChainRepository(BlockChainRepository blockChainRepository) {
+		this.blockChainRepository = blockChainRepository;
 	}
 
 	@Autowired

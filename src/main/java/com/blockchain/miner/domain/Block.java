@@ -1,4 +1,4 @@
-package com.blockchain.miner;
+package com.blockchain.miner.domain;
 
 import org.slf4j.*;
 
@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class Block {
 
-	private static final Logger logger = LoggerFactory.getLogger(Block.class);
 	private static final String NONCE_MAP_KEY_NAME = "nonce";
 	private static final String LAST_BLOCK_KEY_NAME = "last_block_hash";
 	private Map<String, String> data;

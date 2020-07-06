@@ -1,5 +1,6 @@
-package com.blockchain.miner;
+package com.blockchain.miner.infrastructure;
 
+import com.blockchain.miner.domain.*;
 import org.springframework.stereotype.Component;
 
 import java.util.*;

@@ -1,5 +1,6 @@
-package com.blockchain.miner;
+package com.blockchain.miner.domain;
 
+import com.blockchain.miner.repository.BlockChainRepository;
 import org.slf4j.*;
 
 public class MiningEngine {
@@ -7,23 +8,23 @@ public class MiningEngine {
 	private static final Logger logger = LoggerFactory.getLogger(MiningEngine.class);
 	private static final int TEN_SECONDS = 10;
 
-	private BlockChainStorage storage;
+	private BlockChainRepository blockChainRepository;
 	private BlockChain blockChain;
 	private BlockPayloadService blockPayloadService;
 	private static final int N_ZEROS = 2;
 
-	public static MiningEngine initializeFromStorage(BlockChainStorage blockChainStorage,
-													 BlockPayloadService blockPayloadService) {
+	public static MiningEngine initializeFromRepository(BlockChainRepository blockChainRepository,
+														BlockPayloadService blockPayloadService) {
 		MiningEngine miningEngine = new MiningEngine();
-		miningEngine.setStorage(blockChainStorage);
+		miningEngine.setRepository(blockChainRepository);
 		miningEngine.setBlockPayloadService(blockPayloadService);
-		BlockChain blockChain = blockChainStorage.getBlockChain();
+		BlockChain blockChain = blockChainRepository.getBlockChain();
 		miningEngine.setBlockChain(blockChain);
 		return miningEngine;
 	}
 
-	public void setStorage(BlockChainStorage storage) {
-		this.storage = storage;
+	public void setRepository(BlockChainRepository storage) {
+		this.blockChainRepository = storage;
 	}
 
 	private void setBlockPayloadService(BlockPayloadService blockPayloadService) {

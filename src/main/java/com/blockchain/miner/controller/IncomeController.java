@@ -1,4 +1,4 @@
-package com.blockchain.miner.rest;
+package com.blockchain.miner.controller;
 
 import com.blockchain.miner.service.IncomeApplicationService;
 import org.slf4j.*;

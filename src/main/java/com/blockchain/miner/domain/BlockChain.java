@@ -1,4 +1,4 @@
-package com.blockchain.miner;
+package com.blockchain.miner.domain;
 
 import java.util.LinkedList;
 
@@ -8,7 +8,7 @@ public class BlockChain {
 
 	public static BlockChain empty() {
 		BlockChain blockChain = new BlockChain();
-		blockChain.setChain(new LinkedList<Block>());
+		blockChain.setChain(new LinkedList<>());
 		return blockChain;
 	}
 
