@@ -1,7 +1,9 @@
 package com.blockchain.miner.domain;
 
-import com.blockchain.miner.repository.BlockChainRepository;
+import com.blockchain.miner.repository.*;
 import org.slf4j.*;
+
+import java.util.Optional;
 
 public class MiningEngine {
 
@@ -9,22 +11,29 @@ public class MiningEngine {
 	private static final int TEN_SECONDS = 10;
 
 	private BlockChainRepository blockChainRepository;
+	private IncomeDataRepository incomeDataRepository;
 	private BlockChain blockChain;
 	private BlockPayloadService blockPayloadService;
 	private static final int N_ZEROS = 2;
 
 	public static MiningEngine initializeFromRepository(BlockChainRepository blockChainRepository,
-														BlockPayloadService blockPayloadService) {
+														BlockPayloadService blockPayloadService,
+														IncomeDataRepository incomeDataRepository) {
 		MiningEngine miningEngine = new MiningEngine();
-		miningEngine.setRepository(blockChainRepository);
+		miningEngine.setBlockChainRepository(blockChainRepository);
+		miningEngine.setIncomeDataRepository(incomeDataRepository);
 		miningEngine.setBlockPayloadService(blockPayloadService);
 		BlockChain blockChain = blockChainRepository.getBlockChain();
 		miningEngine.setBlockChain(blockChain);
 		return miningEngine;
 	}
 
-	public void setRepository(BlockChainRepository storage) {
+	public void setBlockChainRepository(BlockChainRepository storage) {
 		this.blockChainRepository = storage;
+	}
+
+	public void setIncomeDataRepository(IncomeDataRepository incomeDataRepository) {
+		this.incomeDataRepository = incomeDataRepository;
 	}
 
 	private void setBlockPayloadService(BlockPayloadService blockPayloadService) {
@@ -43,28 +52,22 @@ public class MiningEngine {
 			while (true) {
 				mineThisBlockForTimeInSeconds(block, TEN_SECONDS);
 
-				// go to the income data repository to check for blocks
-
-				// check
-				// add external if exists
-					// break
-				if (block.isMined()) {
+				Optional<Block> incomeBlockOptional = incomeDataRepository.getIncomeBlock();
+				if (incomeBlockOptional.isPresent()) {
+					blockChain.addBlock(incomeBlockOptional.get());
+					logger.info("Added income block with hash: " + block.getHash().toString() + " and nonce: " + block.getNonce());
+					break;
+				} else if (block.isMined()) {
 					blockChain.addBlock(block);
+					logger.info("Created desired block with hash: " + block.getHash().toString() + " and nonce: " + block.getNonce());
+					// TODO notify
 					break;
 				}
-				// mine for some time
-				// check for another miner block
-				// if received block than add it to chain and start from scratch
-				// go on
 			}
 
-
-
-			blockChain.addBlock(block);
-			logger.info("Created desired block with hash: " + block.getHash().toString() + " and nonce: " + block.getNonce());
 		}
 
-		// TODO notify
+
 	}
 
 	private void mineThisBlockForTimeInSeconds(Block block, int seconds) throws HashCalculationException {

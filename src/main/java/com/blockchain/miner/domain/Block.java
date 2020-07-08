@@ -20,6 +20,12 @@ public class Block {
 		return block;
 	}
 
+	public static Block fromIncomeBlockData(Map<String, String> blockData) {
+		Block block = new Block();
+		block.setData(blockData);
+		return block;
+	}
+
 	public void setData(Map<String, String> data) {
 		this.data = data;
 	}
