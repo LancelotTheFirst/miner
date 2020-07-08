@@ -14,7 +14,7 @@ public class MiningEngine {
 	private IncomeDataRepository incomeDataRepository;
 	private BlockChain blockChain;
 	private BlockPayloadService blockPayloadService;
-	private static final int N_ZEROS = 2;
+	private static final int N_ZEROS = 3;
 
 	public static MiningEngine initializeFromRepository(BlockChainRepository blockChainRepository,
 														BlockPayloadService blockPayloadService,
@@ -74,7 +74,7 @@ public class MiningEngine {
 		long current = System.currentTimeMillis();
 		long end = current + seconds * 1000;
 		while(System.currentTimeMillis() < end) {
-			logger.info("Hash: " + block.getHash().toString());
+			//logger.info("Hash: " + block.getHash().toString());
 			if (block.getHash().isDesired(N_ZEROS)) {
 				block.setMined(true);
 				return;

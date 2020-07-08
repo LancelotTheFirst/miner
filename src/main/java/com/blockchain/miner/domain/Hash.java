@@ -43,7 +43,7 @@ public class Hash {
 
 	public boolean isDesired(int nZeros) {
 		for (int i = 0; i < nZeros; i++) {
-			if (hexHashChars[i] != 0) {
+			if (hexHashChars[i] != Character.forDigit(0, 10)) {
 				return false;
 			}
 		}
