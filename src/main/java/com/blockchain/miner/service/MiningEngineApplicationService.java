@@ -15,10 +15,10 @@ public class MiningEngineApplicationService {
 	private static final Logger logger = LoggerFactory.getLogger(MiningEngineApplicationService.class);
 
 	public void start() {
-		MiningEngine miningEngine = MiningEngine.initializeFromRepository(
+		ProofOfWorkMiningEngine proofOfWorkMiningEngine = ProofOfWorkMiningEngine.initializeFromRepository(
 			blockChainRepository, blockPayloadService, incomeDataRepository);
 		try {
-			miningEngine.start();
+			proofOfWorkMiningEngine.start();
 		} catch (HashCalculationException e) {
 			logger.error("Stopping mining because of error: " + e.getMessage(), e);
 		} catch (Exception e) {

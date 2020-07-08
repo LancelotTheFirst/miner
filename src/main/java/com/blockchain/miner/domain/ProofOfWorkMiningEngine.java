@@ -5,9 +5,9 @@ import org.slf4j.*;
 
 import java.util.Optional;
 
-public class MiningEngine {
+public class ProofOfWorkMiningEngine {
 
-	private static final Logger logger = LoggerFactory.getLogger(MiningEngine.class);
+	private static final Logger logger = LoggerFactory.getLogger(ProofOfWorkMiningEngine.class);
 	private static final int TEN_SECONDS = 10;
 
 	private BlockChainRepository blockChainRepository;
@@ -16,16 +16,16 @@ public class MiningEngine {
 	private BlockPayloadService blockPayloadService;
 	private static final int N_ZEROS = 3;
 
-	public static MiningEngine initializeFromRepository(BlockChainRepository blockChainRepository,
-														BlockPayloadService blockPayloadService,
-														IncomeDataRepository incomeDataRepository) {
-		MiningEngine miningEngine = new MiningEngine();
-		miningEngine.setBlockChainRepository(blockChainRepository);
-		miningEngine.setIncomeDataRepository(incomeDataRepository);
-		miningEngine.setBlockPayloadService(blockPayloadService);
+	public static ProofOfWorkMiningEngine initializeFromRepository(BlockChainRepository blockChainRepository,
+																   BlockPayloadService blockPayloadService,
+																   IncomeDataRepository incomeDataRepository) {
+		ProofOfWorkMiningEngine proofOfWorkMiningEngine = new ProofOfWorkMiningEngine();
+		proofOfWorkMiningEngine.setBlockChainRepository(blockChainRepository);
+		proofOfWorkMiningEngine.setIncomeDataRepository(incomeDataRepository);
+		proofOfWorkMiningEngine.setBlockPayloadService(blockPayloadService);
 		BlockChain blockChain = blockChainRepository.getBlockChain();
-		miningEngine.setBlockChain(blockChain);
-		return miningEngine;
+		proofOfWorkMiningEngine.setBlockChain(blockChain);
+		return proofOfWorkMiningEngine;
 	}
 
 	public void setBlockChainRepository(BlockChainRepository storage) {
