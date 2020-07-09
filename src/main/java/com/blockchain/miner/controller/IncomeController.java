@@ -42,7 +42,10 @@ public class IncomeController {
 			emptyFieldNames.add("Node Address");
 		}
 		if (message.getBlockData() == null || message.getBlockData().isEmpty()) {
-			emptyFieldNames.add("Payload");
+			emptyFieldNames.add("Block Data");
+		}
+		if (message.getHash() == null || message.getHash().isEmpty()) {
+			emptyFieldNames.add("Hash");
 		}
 		if (!emptyFieldNames.isEmpty()) {
 			throw new RequiredIncomeDataEmptyException(emptyFieldNames);

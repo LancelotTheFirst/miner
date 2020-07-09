@@ -42,4 +42,12 @@ public class HandleBlockCreatedResult {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	@Override
+	public String toString() {
+		return "HandleBlockCreatedResult{" +
+			"status='" + status + '\'' +
+			", message='" + message + '\'' +
+			'}';
+	}
 }

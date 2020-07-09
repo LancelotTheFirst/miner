@@ -11,7 +11,7 @@ public class IncomeApplicationService {
 	private IncomeDataRepository repository;
 
 	public HandleBlockCreatedResult handleBlockCreatedNotification(BlockCreatedMessage message) {
-		repository.saveIncomeBlockData(message.getBlockData());
+		repository.saveIncomeBlock(message.getBlockData(), message.getHash());
 		return HandleBlockCreatedResult.success();
 	}
 

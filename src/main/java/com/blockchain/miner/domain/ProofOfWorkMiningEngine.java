@@ -15,14 +15,17 @@ public class ProofOfWorkMiningEngine {
 	private BlockChain blockChain;
 	private BlockPayloadService blockPayloadService;
 	private static final int N_ZEROS = 3;
+	private BlockDistributionService blockDistributionService;
 
 	public static ProofOfWorkMiningEngine initializeFromRepository(BlockChainRepository blockChainRepository,
 																   BlockPayloadService blockPayloadService,
-																   IncomeDataRepository incomeDataRepository) {
+																   IncomeDataRepository incomeDataRepository,
+																   BlockDistributionService blockDistributionService) {
 		ProofOfWorkMiningEngine proofOfWorkMiningEngine = new ProofOfWorkMiningEngine();
 		proofOfWorkMiningEngine.setBlockChainRepository(blockChainRepository);
 		proofOfWorkMiningEngine.setIncomeDataRepository(incomeDataRepository);
 		proofOfWorkMiningEngine.setBlockPayloadService(blockPayloadService);
+		proofOfWorkMiningEngine.setBlockDistributionService(blockDistributionService);
 		BlockChain blockChain = blockChainRepository.getBlockChain();
 		proofOfWorkMiningEngine.setBlockChain(blockChain);
 		return proofOfWorkMiningEngine;
@@ -38,6 +41,10 @@ public class ProofOfWorkMiningEngine {
 
 	private void setBlockPayloadService(BlockPayloadService blockPayloadService) {
 		this.blockPayloadService = blockPayloadService;
+	}
+
+	public void setBlockDistributionService(BlockDistributionService blockDistributionService) {
+		this.blockDistributionService = blockDistributionService;
 	}
 
 	private void setBlockChain(BlockChain blockChain) {
@@ -60,7 +67,7 @@ public class ProofOfWorkMiningEngine {
 				} else if (block.isMined()) {
 					blockChain.addBlock(block);
 					logger.info("Created desired block with hash: " + block.getHash().toString() + " and nonce: " + block.getNonce());
-					// TODO notify
+					blockDistributionService.distributeBlock(block);
 					break;
 				}
 			}
@@ -74,7 +81,6 @@ public class ProofOfWorkMiningEngine {
 		long current = System.currentTimeMillis();
 		long end = current + seconds * 1000;
 		while(System.currentTimeMillis() < end) {
-			//logger.info("Hash: " + block.getHash().toString());
 			if (block.getHash().isDesired(N_ZEROS)) {
 				block.setMined(true);
 				return;

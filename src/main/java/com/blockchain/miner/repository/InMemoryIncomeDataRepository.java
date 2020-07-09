@@ -5,14 +5,19 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+/**
+ * Now it can save only one last block - not thread safe
+ */
 @Component
 public class InMemoryIncomeDataRepository implements IncomeDataRepository {
 
 	private Map<String, String> incomeBlockData = new HashMap<>();
+	private String hash;
 
 	@Override
-	public void saveIncomeBlockData(Map<String, String> blockData) {
-		incomeBlockData = new HashMap<>(blockData);
+	public void saveIncomeBlock(Map<String, String> incomeBlockData, String hash) {
+		this.incomeBlockData = new HashMap<>(incomeBlockData);
+		this.hash = hash;
 	}
 
 	@Override
@@ -20,12 +25,16 @@ public class InMemoryIncomeDataRepository implements IncomeDataRepository {
 		if (incomeBlockData.isEmpty()) {
 			return Optional.empty();
 		} else {
-			return Optional.ofNullable(Block.fromIncomeBlockData(incomeBlockData));
+			return Optional.ofNullable(Block.fromIncomeBlock(incomeBlockData, hash));
 		}
 
 	}
 
 	public Map<String, String> getIncomeBlockData() {
 		return incomeBlockData;
+	}
+
+	public String getHash() {
+		return hash;
 	}
 }

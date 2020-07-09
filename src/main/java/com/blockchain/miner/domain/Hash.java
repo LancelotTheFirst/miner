@@ -9,11 +9,13 @@ public class Hash {
 
 	private static final Logger logger = LoggerFactory.getLogger(Hash.class);
 	private char[] hexHashChars;
+	private String hashAsString;
 
 	public static Hash from(Block block) throws HashCalculationException {
 		char[] hashChars = calculateHash(block);
 		Hash hash = new Hash();
 		hash.setHexHashChars(hashChars);
+		hash.setHashAsString(String.valueOf(hashChars));
 		return hash;
 	}
 
@@ -41,6 +43,13 @@ public class Hash {
 		return hexString.toString().toCharArray();
 	}
 
+	public static Hash fromEarlierCalculatedHashString(String hashAsString) {
+		Hash hash = new Hash();
+		hash.setHexHashChars(hashAsString.toCharArray());
+		hash.setHashAsString(hashAsString);
+		return hash;
+	}
+
 	public boolean isDesired(int nZeros) {
 		for (int i = 0; i < nZeros; i++) {
 			if (hexHashChars[i] != Character.forDigit(0, 10)) {
@@ -58,8 +67,12 @@ public class Hash {
 		this.hexHashChars = hexHashChars;
 	}
 
+	public void setHashAsString(String hashAsString) {
+		this.hashAsString = hashAsString;
+	}
+
 	@Override
 	public String toString() {
-		return String.valueOf(hexHashChars);
+		return hashAsString;
 	}
 }

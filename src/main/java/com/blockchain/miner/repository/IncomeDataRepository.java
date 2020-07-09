@@ -6,7 +6,7 @@ import java.util.*;
 
 public interface IncomeDataRepository {
 
-	void saveIncomeBlockData(Map<String, String> blockData);
+	void saveIncomeBlock(Map<String, String> blockData, String hash);
 
 	Optional<Block> getIncomeBlock();
 }

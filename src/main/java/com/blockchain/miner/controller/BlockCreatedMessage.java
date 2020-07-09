@@ -6,6 +6,15 @@ public class BlockCreatedMessage {
 
 	private String nodeAddress;
 	private Map<String, String> blockData;
+	private String hash;
+
+	public static BlockCreatedMessage from(String nodeAddress, Map<String, String> blockData, String hash) {
+		BlockCreatedMessage message = new BlockCreatedMessage();
+		message.setNodeAddress(nodeAddress);
+		message.setBlockData(blockData);
+		message.setHash(hash);
+		return message;
+	}
 
 	public String getNodeAddress() {
 		return nodeAddress;
@@ -21,5 +30,13 @@ public class BlockCreatedMessage {
 
 	public void setBlockData(Map<String, String> blockData) {
 		this.blockData = blockData;
+	}
+
+	public String getHash() {
+		return hash;
+	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
 	}
 }

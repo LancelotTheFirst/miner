@@ -20,9 +20,10 @@ public class Block {
 		return block;
 	}
 
-	public static Block fromIncomeBlockData(Map<String, String> blockData) {
+	public static Block fromIncomeBlock(Map<String, String> blockData, String hash) {
 		Block block = new Block();
 		block.setData(blockData);
+		block.setHash(Hash.fromEarlierCalculatedHashString(hash));
 		return block;
 	}
 

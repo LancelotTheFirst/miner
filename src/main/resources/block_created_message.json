@@ -1,0 +1,5 @@
+{
+  "nodeAddress": "dummy_address",
+  "hash": "dummy_hash",
+  "blockData": {"key1": "value1", "key2": "value2"}
+}
