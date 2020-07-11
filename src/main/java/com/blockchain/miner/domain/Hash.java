@@ -61,6 +61,7 @@ public class Hash {
 
 	public void recalculateHash(Block block) throws HashCalculationException {
 		this.hexHashChars = calculateHash(block);
+		hashAsString = String.valueOf(hexHashChars);
 	}
 
 	public void setHexHashChars(char[] hexHashChars) {

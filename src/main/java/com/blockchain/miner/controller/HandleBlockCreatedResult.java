@@ -4,6 +4,7 @@ public class HandleBlockCreatedResult {
 
 	private static final String SUCCESS_STATUS = "success";
 	private static final String ERROR_STATUS = "error";
+	public static final String EMPTY = "";
 	private String status;
 	private String message;
 
@@ -24,6 +25,7 @@ public class HandleBlockCreatedResult {
 	public static HandleBlockCreatedResult success() {
 		HandleBlockCreatedResult result = new HandleBlockCreatedResult();
 		result.setStatus(SUCCESS_STATUS);
+		result.setMessage(EMPTY);
 		return result;
 	}
 

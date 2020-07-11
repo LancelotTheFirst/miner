@@ -1,8 +1,6 @@
 package com.blockchain.miner.domain;
 
-import org.slf4j.*;
-
-import java.util.Map;
+import java.util.*;
 
 public class Block {
 
@@ -22,7 +20,7 @@ public class Block {
 
 	public static Block fromIncomeBlock(Map<String, String> blockData, String hash) {
 		Block block = new Block();
-		block.setData(blockData);
+		block.setData(new HashMap<>(blockData));
 		block.setHash(Hash.fromEarlierCalculatedHashString(hash));
 		return block;
 	}
@@ -63,5 +61,13 @@ public class Block {
 
 	public void setMined(boolean mined) {
 		isMined = mined;
+	}
+
+	@Override
+	public String toString() {
+		return "Block{" +
+			"data=" + data +
+			", hash=" + hash +
+			'}';
 	}
 }

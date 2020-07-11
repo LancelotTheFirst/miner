@@ -11,6 +11,7 @@ import java.util.*;
 @Component
 public class InMemoryIncomeDataRepository implements IncomeDataRepository {
 
+	public static final String EMPTY = "";
 	private Map<String, String> incomeBlockData = new HashMap<>();
 	private String hash;
 
@@ -25,9 +26,16 @@ public class InMemoryIncomeDataRepository implements IncomeDataRepository {
 		if (incomeBlockData.isEmpty()) {
 			return Optional.empty();
 		} else {
-			return Optional.ofNullable(Block.fromIncomeBlock(incomeBlockData, hash));
+			Optional<Block> blockOptional = Optional.of(Block.fromIncomeBlock(incomeBlockData, hash));
+			clear();
+			return blockOptional;
 		}
 
+	}
+
+	private void clear() {
+		incomeBlockData = new HashMap<>();
+		hash = EMPTY;
 	}
 
 	public Map<String, String> getIncomeBlockData() {

@@ -14,7 +14,7 @@ public class ProofOfWorkMiningEngine {
 	private IncomeDataRepository incomeDataRepository;
 	private BlockChain blockChain;
 	private BlockPayloadService blockPayloadService;
-	private static final int N_ZEROS = 3;
+	private static final int N_ZEROS = 5;
 	private BlockDistributionService blockDistributionService;
 
 	public static ProofOfWorkMiningEngine initializeFromRepository(BlockChainRepository blockChainRepository,
@@ -57,19 +57,21 @@ public class ProofOfWorkMiningEngine {
 			logger.info("Received payload for new block: " + payload.toString());
 			Block block = Block.from(payload);
 			while (true) {
+				logger.info("Current state of blockchain: " + blockChain.toString());
 				mineThisBlockForTimeInSeconds(block, TEN_SECONDS);
-
 				Optional<Block> incomeBlockOptional = incomeDataRepository.getIncomeBlock();
 				if (incomeBlockOptional.isPresent()) {
-					blockChain.addBlock(incomeBlockOptional.get());
-					logger.info("Added income block with hash: " + block.getHash().toString() + " and nonce: " + block.getNonce());
+					Block incomeBlock = incomeBlockOptional.get();
+					blockChain.addBlock(incomeBlock);
+					logger.info("Added income block with hash: " + incomeBlock.getHash().toString() + " and nonce: " + incomeBlock.getNonce());
 					break;
 				} else if (block.isMined()) {
 					blockChain.addBlock(block);
 					logger.info("Created desired block with hash: " + block.getHash().toString() + " and nonce: " + block.getNonce());
-					blockDistributionService.distributeBlock(block);
+					//blockDistributionService.distributeBlock(block);
 					break;
 				}
+
 			}
 
 		}

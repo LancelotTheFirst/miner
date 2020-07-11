@@ -39,4 +39,13 @@ public class BlockCreatedMessage {
 	public void setHash(String hash) {
 		this.hash = hash;
 	}
+
+	@Override
+	public String toString() {
+		return "BlockCreatedMessage{" +
+			"nodeAddress='" + nodeAddress + '\'' +
+			", blockData=" + blockData +
+			", hash='" + hash + '\'' +
+			'}';
+	}
 }

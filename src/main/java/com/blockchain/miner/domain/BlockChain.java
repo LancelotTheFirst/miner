@@ -23,4 +23,10 @@ public class BlockChain {
 		chain.add(block);
 	}
 
+	@Override
+	public String toString() {
+		return "BlockChain{" +
+			"chain=" + chain +
+			'}';
+	}
 }

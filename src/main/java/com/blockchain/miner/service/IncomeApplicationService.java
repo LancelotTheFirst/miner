@@ -10,7 +10,7 @@ public class IncomeApplicationService {
 
 	private IncomeDataRepository repository;
 
-	public HandleBlockCreatedResult handleBlockCreatedNotification(BlockCreatedMessage message) {
+	public HandleBlockCreatedResult addIncomeBlock(BlockCreatedMessage message) {
 		repository.saveIncomeBlock(message.getBlockData(), message.getHash());
 		return HandleBlockCreatedResult.success();
 	}

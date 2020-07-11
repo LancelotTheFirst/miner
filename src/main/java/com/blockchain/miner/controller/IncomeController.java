@@ -3,6 +3,7 @@ package com.blockchain.miner.controller;
 import com.blockchain.miner.service.IncomeApplicationService;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -18,22 +19,23 @@ public class IncomeController {
 
 	private IncomeApplicationService applicationService;
 
-	@PostMapping(value = "/blockcreated", consumes = "application/json", produces = "application/json")
-	public HandleBlockCreatedResult handleBlockCreatedNotification(BlockCreatedMessage message) {
-		HandleBlockCreatedResult result;
+	@PostMapping(value = "/blockcreated")
+	public ResponseEntity<HandleBlockCreatedResult> addCreatedBlock(@RequestBody BlockCreatedMessage message) {
 		try {
+			logger.info("Received income message: " + message.toString());
 			checkAllRequiredFieldsAreFilled(message);
-
-			result = applicationService.handleBlockCreatedNotification(message);
+			HandleBlockCreatedResult result = applicationService.addIncomeBlock(message);
+			return ResponseEntity.ok(result);
 		} catch (RequiredIncomeDataEmptyException e) {
 			logger.error("Node with address: " + message.getNodeAddress() + " sent this required fields:" +
 				e.getEmptyFieldNames() + " as empty");
-			result = HandleBlockCreatedResult.from(e);
+			HandleBlockCreatedResult result = HandleBlockCreatedResult.from(e);
+			return ResponseEntity.badRequest().body(result);
 		} catch (Exception e) {
 			logger.error("Error while handling income block created notification from node with address: " + message.getNodeAddress());
-			result = HandleBlockCreatedResult.from(e);
+			HandleBlockCreatedResult result = HandleBlockCreatedResult.from(e);
+			return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return result;
 	}
 
 	private void checkAllRequiredFieldsAreFilled(BlockCreatedMessage message) throws RequiredIncomeDataEmptyException {
