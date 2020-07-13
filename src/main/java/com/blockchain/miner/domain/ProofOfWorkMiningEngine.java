@@ -68,7 +68,7 @@ public class ProofOfWorkMiningEngine {
 				} else if (block.isMined()) {
 					blockChain.addBlock(block);
 					logger.info("Created desired block with hash: " + block.getHash().toString() + " and nonce: " + block.getNonce());
-					//blockDistributionService.distributeBlock(block);
+					blockDistributionService.distributeBlock(block);
 					break;
 				}
 
