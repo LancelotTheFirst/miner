@@ -52,7 +52,7 @@ public class Block {
 	}
 
 	public void addHashOfLastBlock(Hash hash) {
-		data.put(LAST_BLOCK_KEY_NAME, hash.toString());
+		data.put(LAST_BLOCK_KEY_NAME, hash.asString());
 	}
 
 	public boolean isMined() {

@@ -63,11 +63,11 @@ public class ProofOfWorkMiningEngine {
 				if (incomeBlockOptional.isPresent()) {
 					Block incomeBlock = incomeBlockOptional.get();
 					blockChain.addBlock(incomeBlock);
-					logger.info("Added income block with hash: " + incomeBlock.getHash().toString() + " and nonce: " + incomeBlock.getNonce());
+					logger.info("Added income block with hash: " + incomeBlock.getHash().asString() + " and nonce: " + incomeBlock.getNonce());
 					break;
 				} else if (block.isMined()) {
 					blockChain.addBlock(block);
-					logger.info("Created desired block with hash: " + block.getHash().toString() + " and nonce: " + block.getNonce());
+					logger.info("Created desired block with hash: " + block.getHash().asString() + " and nonce: " + block.getNonce());
 					blockDistributionService.distributeBlock(block);
 					break;
 				}

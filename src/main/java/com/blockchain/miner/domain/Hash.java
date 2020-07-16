@@ -72,8 +72,13 @@ public class Hash {
 		this.hashAsString = hashAsString;
 	}
 
+	public String asString() {
+		return hashAsString;
+	}
+
 	@Override
 	public String toString() {
 		return hashAsString;
 	}
+
 }
