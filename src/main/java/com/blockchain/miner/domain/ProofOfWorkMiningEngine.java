@@ -2,6 +2,7 @@ package com.blockchain.miner.domain;
 
 import com.blockchain.miner.repository.*;
 import org.slf4j.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -11,7 +12,7 @@ public class ProofOfWorkMiningEngine {
 	private static final int TEN_SECONDS = 10;
 
 	private BlockChainRepository blockChainRepository;
-	private IncomeDataRepository incomeDataRepository;
+	private IncomeDataService incomeDataService;
 	private BlockChain blockChain;
 	private BlockPayloadService blockPayloadService;
 	private static final int N_ZEROS = 5;
@@ -19,11 +20,11 @@ public class ProofOfWorkMiningEngine {
 
 	public static ProofOfWorkMiningEngine initializeFromRepository(BlockChainRepository blockChainRepository,
 																   BlockPayloadService blockPayloadService,
-																   IncomeDataRepository incomeDataRepository,
+																   IncomeDataService incomeDataService,
 																   BlockDistributionService blockDistributionService) {
 		ProofOfWorkMiningEngine proofOfWorkMiningEngine = new ProofOfWorkMiningEngine();
 		proofOfWorkMiningEngine.setBlockChainRepository(blockChainRepository);
-		proofOfWorkMiningEngine.setIncomeDataRepository(incomeDataRepository);
+		proofOfWorkMiningEngine.setIncomeDataService(incomeDataService);
 		proofOfWorkMiningEngine.setBlockPayloadService(blockPayloadService);
 		proofOfWorkMiningEngine.setBlockDistributionService(blockDistributionService);
 		BlockChain blockChain = blockChainRepository.getBlockChain();
@@ -35,8 +36,8 @@ public class ProofOfWorkMiningEngine {
 		this.blockChainRepository = storage;
 	}
 
-	public void setIncomeDataRepository(IncomeDataRepository incomeDataRepository) {
-		this.incomeDataRepository = incomeDataRepository;
+	public void setIncomeDataService(IncomeDataService incomeDataService) {
+		this.incomeDataService = incomeDataService;
 	}
 
 	private void setBlockPayloadService(BlockPayloadService blockPayloadService) {
@@ -59,11 +60,9 @@ public class ProofOfWorkMiningEngine {
 			while (true) {
 				logger.info("Current state of blockchain: " + blockChain.toString());
 				mineThisBlockForTimeInSeconds(block, TEN_SECONDS);
-				Optional<Block> incomeBlockOptional = incomeDataRepository.getIncomeBlock();
+				Optional<Block> incomeBlockOptional = incomeDataService.getIncomeBlock();
 				if (incomeBlockOptional.isPresent()) {
-					Block incomeBlock = incomeBlockOptional.get();
-					blockChain.addBlock(incomeBlock);
-					logger.info("Added income block with hash: " + incomeBlock.getHash().asString() + " and nonce: " + incomeBlock.getNonce());
+					addIncomeBlockToBlockChain(incomeBlockOptional);
 					break;
 				} else if (block.isMined()) {
 					blockChain.addBlock(block);
@@ -77,6 +76,14 @@ public class ProofOfWorkMiningEngine {
 		}
 
 
+	}
+
+	@Transactional
+	public void addIncomeBlockToBlockChain(Optional<Block> incomeBlockOptional) {
+		Block incomeBlock = incomeBlockOptional.get();
+		blockChain.addBlock(incomeBlock);
+		incomeDataService.deleteBlock(incomeBlock);
+		logger.info("Added income block with hash: " + incomeBlock.getHash().asString() + " and nonce: " + incomeBlock.getNonce());
 	}
 
 	private void mineThisBlockForTimeInSeconds(Block block, int seconds) throws HashCalculationException {

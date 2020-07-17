@@ -1,6 +1,6 @@
 package com.blockchain.miner.service;
 
-import com.blockchain.miner.repository.IncomeDataRepository;
+import com.blockchain.miner.repository.*;
 import com.blockchain.miner.controller.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,8 @@ public class IncomeApplicationService {
 	private IncomeDataRepository repository;
 
 	public HandleBlockCreatedResult addIncomeBlock(BlockCreatedMessage message) {
-		repository.saveIncomeBlock(message.getBlockData(), message.getHash());
+		BlockCreatedEntity blockCreatedEntity = BlockCreatedEntity.from(message);
+		repository.save(blockCreatedEntity);
 		return HandleBlockCreatedResult.success();
 	}
 

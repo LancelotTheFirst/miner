@@ -26,6 +26,30 @@
 
     + Do async block distribution using jms.
     
+    % Try to use NoSql storage.
+    
+        * May be Spring Data key-value no sql storage would be convenient - rejected.
+        
+17.07.2020
+
+    + Store income blocks in mongo.
+    
+    + Get income block and then delete it. 
+    
+    + Add transaction support.
+    
+    - Look docker lesson.
+    
+    - Run apps in docker containers with own databases. 
+    
+    - Add initialization from another miner entries because local data may be already not actual.
+    
+        - Add block number to Block.
+        
+        - Add date and time of creation to block.
+        
+        - For income blocks with the same number use older one.
+    
     - Investigate why it is nesessary to Autowire by setters or constructors but not property itself.
     
     - Add separate application and infrastructure properties files and handle them in project.
@@ -37,18 +61,12 @@
     - Check memory and processor usage with actuator.
     
     - Add competitors block validation.
-    
-    - Add initialization from another miner entries because local data may be already not actual.
-    
+        
     - Add logging not only when errors but in normal flow too.
     
     - Add correct exception handling.
     
     - Write comments where you think they are nessesary.
-    
-    - Try to use NoSql storage.
-    
-        - May be Spring Data key-value no sql storage would be convenient.
     
     - Use liquibase.
     

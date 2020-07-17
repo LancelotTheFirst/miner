@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 public class MiningEngineApplicationService {
 
 	private BlockChainRepository blockChainRepository;
-	private IncomeDataRepository incomeDataRepository;
+	private IncomeDataService incomeDataService;
 	private BlockPayloadService blockPayloadService;
 	private BlockDistributionService blockDistributionService;
 	private static final Logger logger = LoggerFactory.getLogger(MiningEngineApplicationService.class);
 
 	public void start() {
 		ProofOfWorkMiningEngine proofOfWorkMiningEngine = ProofOfWorkMiningEngine.initializeFromRepository(
-			blockChainRepository, blockPayloadService, incomeDataRepository, blockDistributionService);
+			blockChainRepository, blockPayloadService, incomeDataService, blockDistributionService);
 		try {
 			proofOfWorkMiningEngine.start();
 		} catch (HashCalculationException e) {
@@ -38,8 +38,8 @@ public class MiningEngineApplicationService {
 	}
 
 	@Autowired
-	public void setIncomeDataRepository(IncomeDataRepository incomeDataRepository) {
-		this.incomeDataRepository = incomeDataRepository;
+	public void setIncomeDataService(IncomeDataService incomeDataService) {
+		this.incomeDataService = incomeDataService;
 	}
 
 	@Autowired

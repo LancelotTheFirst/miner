@@ -4,10 +4,12 @@ import com.blockchain.miner.service.MiningEngineApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.jms.annotation.EnableJms;
 
 @SpringBootApplication
 @EnableJms
+@EnableMongoRepositories
 public class MinerApplication implements CommandLineRunner {
 
 	private MiningEngineApplicationService applicationService;

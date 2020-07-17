@@ -1,12 +1,11 @@
 package com.blockchain.miner.repository;
 
-import com.blockchain.miner.domain.Block;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.*;
+@Repository
+public interface IncomeDataRepository extends MongoRepository<BlockCreatedEntity, String> {
 
-public interface IncomeDataRepository {
+	void deleteByHash(String hash);
 
-	void saveIncomeBlock(Map<String, String> blockData, String hash);
-
-	Optional<Block> getIncomeBlock();
 }
