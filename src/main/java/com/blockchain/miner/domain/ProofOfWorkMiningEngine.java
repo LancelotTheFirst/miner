@@ -15,6 +15,7 @@ public class ProofOfWorkMiningEngine {
 	private IncomeDataService incomeDataService;
 	private BlockChain blockChain;
 	private BlockPayloadService blockPayloadService;
+	private TransactionalBlockChainService transactionalBlockChainService;
 	private static final int N_ZEROS = 5;
 	private BlockDistributionService blockDistributionService;
 
@@ -29,6 +30,8 @@ public class ProofOfWorkMiningEngine {
 		proofOfWorkMiningEngine.setBlockDistributionService(blockDistributionService);
 		BlockChain blockChain = blockChainRepository.getBlockChain();
 		proofOfWorkMiningEngine.setBlockChain(blockChain);
+		proofOfWorkMiningEngine.setTransactionalBlockChainService(new TransactionalBlockChainService(blockChain,
+			blockDistributionService, incomeDataService));
 		return proofOfWorkMiningEngine;
 	}
 
@@ -62,12 +65,13 @@ public class ProofOfWorkMiningEngine {
 				mineThisBlockForTimeInSeconds(block, TEN_SECONDS);
 				Optional<Block> incomeBlockOptional = incomeDataService.getIncomeBlock();
 				if (incomeBlockOptional.isPresent()) {
-					addIncomeBlockToBlockChain(incomeBlockOptional);
+					Block incomeBlock = incomeBlockOptional.get();
+					transactionalBlockChainService.addIncomeBlockToBlockChain(incomeBlock);
+					logger.info("Added income block with hash: " + incomeBlock.getHash().asString() + " and nonce: " + incomeBlock.getNonce());
 					break;
 				} else if (block.isMined()) {
-					blockChain.addBlock(block);
 					logger.info("Created desired block with hash: " + block.getHash().asString() + " and nonce: " + block.getNonce());
-					blockDistributionService.distributeBlock(block);
+					transactionalBlockChainService.addToBlockChainAndDistribute(block);
 					break;
 				}
 
@@ -75,15 +79,6 @@ public class ProofOfWorkMiningEngine {
 
 		}
 
-
-	}
-
-	@Transactional
-	public void addIncomeBlockToBlockChain(Optional<Block> incomeBlockOptional) {
-		Block incomeBlock = incomeBlockOptional.get();
-		blockChain.addBlock(incomeBlock);
-		incomeDataService.deleteBlock(incomeBlock);
-		logger.info("Added income block with hash: " + incomeBlock.getHash().asString() + " and nonce: " + incomeBlock.getNonce());
 	}
 
 	private void mineThisBlockForTimeInSeconds(Block block, int seconds) throws HashCalculationException {
@@ -99,4 +94,7 @@ public class ProofOfWorkMiningEngine {
 		}
 	}
 
+	public void setTransactionalBlockChainService(TransactionalBlockChainService transactionalBlockChainService) {
+		this.transactionalBlockChainService = transactionalBlockChainService;
+	}
 }
