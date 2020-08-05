@@ -38,10 +38,30 @@
     
     + Add transaction support.
     
-    - Look docker lesson.
+04.08.2020    
+
+    + Repair transaction support.
     
-    - Run apps in docker containers with own databases. 
+    + Look docker lesson.
     
+    % Run apps in docker containers with own databases.
+    
+05.08.2020    
+
+    % Run apps in docker containers with own databases.
+    
+    ? Use embedded mongo. 
+    
+    - Write good looking readme.
+    
+        - Draw scheme.
+        
+        - Tell the essence of project.
+        
+    - Develop unit and integration tests.
+    
+    - Save and initialize blockchain from the storage - mongo.    
+        
     - Add initialization from another miner entries because local data may be already not actual.
     
         - Add block number to Block.
@@ -63,6 +83,8 @@
     - Add competitors block validation.
         
     - Add logging not only when errors but in normal flow too.
+        
+    - Add MDC.
     
     - Add correct exception handling.
     
@@ -72,4 +94,3 @@
     
     - Solve strange situation with using request and response classes from controller package in infrastructure.
     
-    - Add MDC.
