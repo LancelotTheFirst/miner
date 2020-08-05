@@ -50,6 +50,12 @@
 
     % Run apps in docker containers with own databases.
     
+        - Rewrite dockerfile - change 'from' to java image
+        
+        - Investigate is it nesessary to forward mongo ports to local OS.
+        
+        - Create docker-compose file - run mongo and app containers for each of two clients.
+    
     ? Use embedded mongo. 
     
     - Write good looking readme.
