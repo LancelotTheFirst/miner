@@ -58,19 +58,23 @@
     
     * Use embedded mongo - rejected. 
 
-    % Run apps in docker containers with own databases.
+    + Run apps in docker containers with own databases.
         
-        % Create docker-compose file - run mongo and app containers for each of two clients.
+        + Create docker-compose file - run mongo and app containers for each of two clients.
         
-            - Enter host of mongo as command line args.
+            + Enter host of mongo as command line args.
             
-                - Test without docker.
+                + Test without docker.
             
-            - Change app port of each miners to 8080.
+            + Change app port of each miners to 8080.
             
-            - Create two different docker files for each miner.
+            + Create two different docker files for each miner.
             
-            - Rewrite docker compose to use different miner images.
+            + Change host of block distributor to miner-one/miner-two using cmd args.
+            
+            + Rewrite docker compose to use different miner images.
+            
+    - Create script to remove images, build new images and run docker-compose.
     
     - Write good looking readme.
     

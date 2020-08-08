@@ -1,0 +1,9 @@
+FROM openjdk:11
+
+RUN mkdir -p /opt/app
+RUN mkdir -p /opt/app/logs
+ENV PROJECT_HOME /opt/app
+COPY target/miner-0.0.1-SNAPSHOT.jar $PROJECT_HOME/miner-0.0.1-SNAPSHOT.jar
+WORKDIR $PROJECT_HOME
+
+CMD ["java","-jar","./miner-0.0.1-SNAPSHOT.jar", "--server.host=miner-one", "--server.port=8080","--competitor.miner.host=miner-two", "--competitor.miner.port=8080","--distribute.method.path=income/blockcreated","--spring.data.mongodb.host=mongo-one"]

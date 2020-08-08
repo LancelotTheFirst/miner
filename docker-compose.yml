@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  mongo-one:
+    image: mongo
+    networks:
+      main:
+        aliases:
+          - mongo-one
+    container_name: "mongo-one"
+    expose:
+      - "27017"
+  miner-one:
+    image: miner-one
+    networks:
+      main:
+        aliases:
+            - miner-one
+    container_name: "miner-one"
+    expose:
+      - "8080"
+    links:
+      - mongo-one
+  mongo-two:
+    image: mongo
+    networks:
+      main:
+        aliases:
+          - mongo-two
+    container_name: "mongo-two"
+    expose:
+      - "27017"
+  miner-two:
+    image: miner-two
+    networks:
+      main:
+        aliases:
+          - miner-two
+    container_name: "miner-two"
+    expose:
+      - "8080"
+    links:
+      - mongo-one
+networks:
+  main:
