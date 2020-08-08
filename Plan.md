@@ -46,17 +46,31 @@
     
     % Run apps in docker containers with own databases.
     
-05.08.2020    
+05-07.08.2020    
 
     % Run apps in docker containers with own databases.
     
-        - Rewrite dockerfile - change 'from' to java image
+        + Rewrite dockerfile - change 'from' to java image
         
-        - Investigate is it nesessary to forward mongo ports to local OS.
+        + Investigate is it nesessary to forward mongo ports to local OS.
         
-        - Create docker-compose file - run mongo and app containers for each of two clients.
+08.08.2020        
     
-    ? Use embedded mongo. 
+    * Use embedded mongo - rejected. 
+
+    % Run apps in docker containers with own databases.
+        
+        % Create docker-compose file - run mongo and app containers for each of two clients.
+        
+            - Enter host of mongo as command line args.
+            
+                - Test without docker.
+            
+            - Change app port of each miners to 8080.
+            
+            - Create two different docker files for each miner.
+            
+            - Rewrite docker compose to use different miner images.
     
     - Write good looking readme.
     
