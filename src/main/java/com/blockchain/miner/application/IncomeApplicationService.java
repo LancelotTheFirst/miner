@@ -1,7 +1,7 @@
-package com.blockchain.miner.service;
+package com.blockchain.miner.application;
 
-import com.blockchain.miner.repository.*;
 import com.blockchain.miner.controller.*;
+import com.blockchain.miner.repository.income.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

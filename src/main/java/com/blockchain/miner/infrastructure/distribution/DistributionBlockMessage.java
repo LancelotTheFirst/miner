@@ -1,6 +1,6 @@
-package com.blockchain.miner.infrastructure;
+package com.blockchain.miner.infrastructure.distribution;
 
-import com.blockchain.miner.domain.Block;
+import com.blockchain.miner.domain.block.Block;
 import com.google.gson.Gson;
 
 import java.io.Serializable;

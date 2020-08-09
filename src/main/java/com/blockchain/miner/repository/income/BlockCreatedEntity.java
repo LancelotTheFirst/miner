@@ -1,4 +1,4 @@
-package com.blockchain.miner.repository;
+package com.blockchain.miner.repository.income;
 
 import com.blockchain.miner.controller.BlockCreatedMessage;
 import org.springframework.data.annotation.Id;

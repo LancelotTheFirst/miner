@@ -1,4 +1,7 @@
-package com.blockchain.miner.domain;
+package com.blockchain.miner.domain.block;
+
+import com.blockchain.miner.domain.block.hash.*;
+import com.blockchain.miner.domain.payload.BlockPayload;
 
 import java.util.*;
 

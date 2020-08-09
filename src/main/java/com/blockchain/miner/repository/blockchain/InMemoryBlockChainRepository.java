@@ -1,6 +1,6 @@
-package com.blockchain.miner.repository;
+package com.blockchain.miner.repository.blockchain;
 
-import com.blockchain.miner.domain.BlockChain;
+import com.blockchain.miner.domain.blockchain.BlockChain;
 import org.springframework.stereotype.Component;
 
 @Component

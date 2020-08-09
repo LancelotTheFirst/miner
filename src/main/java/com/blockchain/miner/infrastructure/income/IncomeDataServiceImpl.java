@@ -1,7 +1,8 @@
-package com.blockchain.miner.infrastructure;
+package com.blockchain.miner.infrastructure.income;
 
-import com.blockchain.miner.domain.*;
-import com.blockchain.miner.repository.*;
+import com.blockchain.miner.domain.block.Block;
+import com.blockchain.miner.domain.income.IncomeDataService;
+import com.blockchain.miner.repository.income.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

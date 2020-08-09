@@ -1,6 +1,6 @@
 package com.blockchain.miner.controller;
 
-import com.blockchain.miner.service.IncomeApplicationService;
+import com.blockchain.miner.application.IncomeApplicationService;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;

@@ -1,8 +1,13 @@
-package com.blockchain.miner.domain;
+package com.blockchain.miner.domain.mining;
 
-import com.blockchain.miner.repository.*;
+import com.blockchain.miner.domain.block.*;
+import com.blockchain.miner.domain.block.hash.HashCalculationException;
+import com.blockchain.miner.domain.blockchain.*;
+import com.blockchain.miner.domain.distribution.BlockDistributionService;
+import com.blockchain.miner.domain.income.IncomeDataService;
+import com.blockchain.miner.domain.payload.*;
+import com.blockchain.miner.repository.blockchain.BlockChainRepository;
 import org.slf4j.*;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 

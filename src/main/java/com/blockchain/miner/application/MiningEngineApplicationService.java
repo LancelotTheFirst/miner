@@ -1,7 +1,11 @@
-package com.blockchain.miner.service;
+package com.blockchain.miner.application;
 
-import com.blockchain.miner.domain.*;
-import com.blockchain.miner.repository.*;
+import com.blockchain.miner.domain.block.hash.HashCalculationException;
+import com.blockchain.miner.domain.distribution.BlockDistributionService;
+import com.blockchain.miner.domain.income.IncomeDataService;
+import com.blockchain.miner.domain.mining.ProofOfWorkMiningEngine;
+import com.blockchain.miner.domain.payload.BlockPayloadService;
+import com.blockchain.miner.repository.blockchain.BlockChainRepository;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

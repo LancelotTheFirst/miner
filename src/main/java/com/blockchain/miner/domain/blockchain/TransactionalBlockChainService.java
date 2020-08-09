@@ -1,5 +1,8 @@
-package com.blockchain.miner.domain;
+package com.blockchain.miner.domain.blockchain;
 
+import com.blockchain.miner.domain.block.Block;
+import com.blockchain.miner.domain.distribution.BlockDistributionService;
+import com.blockchain.miner.domain.income.IncomeDataService;
 import org.springframework.transaction.annotation.Transactional;
 
 /**

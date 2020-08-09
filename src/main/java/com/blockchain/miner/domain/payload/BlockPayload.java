@@ -1,4 +1,4 @@
-package com.blockchain.miner.domain;
+package com.blockchain.miner.domain.payload;
 
 import java.util.Map;
 

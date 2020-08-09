@@ -1,7 +1,8 @@
-package com.blockchain.miner.infrastructure;
+package com.blockchain.miner.infrastructure.distribution;
 
 import com.blockchain.miner.controller.*;
-import com.blockchain.miner.domain.*;
+import com.blockchain.miner.domain.block.Block;
+import com.blockchain.miner.domain.distribution.BlockDistributionService;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
@@ -9,8 +10,6 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.*;
-
-import java.util.*;
 
 @Component
 public class AsyncHttpBlockDistributionService implements BlockDistributionService {

@@ -1,5 +1,6 @@
-package com.blockchain.miner.domain;
+package com.blockchain.miner.domain.block.hash;
 
+import com.blockchain.miner.domain.block.Block;
 import org.slf4j.*;
 
 import java.nio.charset.StandardCharsets;

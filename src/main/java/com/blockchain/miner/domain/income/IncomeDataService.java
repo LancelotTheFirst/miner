@@ -1,4 +1,6 @@
-package com.blockchain.miner.domain;
+package com.blockchain.miner.domain.income;
+
+import com.blockchain.miner.domain.block.Block;
 
 import java.util.Optional;
 
