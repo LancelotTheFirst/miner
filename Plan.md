@@ -74,7 +74,13 @@
             
             + Rewrite docker compose to use different miner images.
             
-    - Create script to remove images, build new images and run docker-compose.
+    + Create script to remove images, build new images and run docker-compose.
+    
+09.08.2020    
+    
+    + Correct packages.
+    
+    - Develop unit and integration tests.
     
     - Write good looking readme.
     
@@ -82,7 +88,9 @@
         
         - Tell the essence of project.
         
-    - Develop unit and integration tests.
+    - Use profiles to choose local or remote launch.
+    
+        - Change cmd args to properties files - profiles will help to choose of them.
     
     - Save and initialize blockchain from the storage - mongo.    
         
