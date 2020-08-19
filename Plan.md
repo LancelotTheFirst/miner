@@ -80,7 +80,15 @@
     
     + Correct packages.
     
-    - Develop unit and integration tests.
+19.08.2020    
+    
+    % Develop unit tests.
+    
+        + Develop tests for Hash class.
+        
+        - Develop test for IncomeController.
+            
+    - Develop integration tests.
     
     - Write good looking readme.
     
