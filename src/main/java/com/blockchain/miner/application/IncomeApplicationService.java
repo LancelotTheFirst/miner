@@ -11,8 +11,8 @@ public class IncomeApplicationService {
 	private IncomeDataRepository repository;
 
 	public HandleBlockCreatedResult addIncomeBlock(BlockCreatedMessage message) {
-		BlockCreatedEntity blockCreatedEntity = BlockCreatedEntity.from(message);
-		repository.save(blockCreatedEntity);
+		BlockCreatedDocument blockCreatedDocument = BlockCreatedDocument.from(message);
+		repository.save(blockCreatedDocument);
 		return HandleBlockCreatedResult.success();
 	}
 

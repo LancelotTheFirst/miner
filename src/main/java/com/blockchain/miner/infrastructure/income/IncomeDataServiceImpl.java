@@ -15,10 +15,10 @@ public class IncomeDataServiceImpl implements IncomeDataService {
 
 	@Override
 	public Optional<Block> getIncomeBlock() {
-		List<BlockCreatedEntity> blockEntities = incomeDataRepository.findAll();
+		List<BlockCreatedDocument> blockEntities = incomeDataRepository.findAll();
 		if (!blockEntities.isEmpty()) {
-			BlockCreatedEntity entity = blockEntities.get(0);
-			Block block = Block.fromIncomeBlock(entity.getBlockData(), entity.getHash());
+			BlockCreatedDocument document = blockEntities.get(0);
+			Block block = Block.fromIncomeBlock(document.getBlockData(), document.getHash());
 			return Optional.of(block);
 		}
 		return Optional.empty();

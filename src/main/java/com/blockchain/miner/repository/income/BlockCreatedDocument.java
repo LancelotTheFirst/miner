@@ -7,19 +7,19 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Map;
 
 @Document(collection = "incomeblocks")
-public class BlockCreatedEntity {
+public class BlockCreatedDocument {
 
 	@Id
 	private String hash;
 	private Map<String, String> blockData;
 	private boolean savedToBlockChain;
 
-	public static BlockCreatedEntity from(BlockCreatedMessage message) {
-		BlockCreatedEntity entity = new BlockCreatedEntity();
-		entity.setHash(message.getHash());
-		entity.setBlockData(message.getBlockData());
-		entity.setSavedToBlockChain(false);
-		return entity;
+	public static BlockCreatedDocument from(BlockCreatedMessage message) {
+		BlockCreatedDocument document = new BlockCreatedDocument();
+		document.setHash(message.getHash());
+		document.setBlockData(message.getBlockData());
+		document.setSavedToBlockChain(false);
+		return document;
 	}
 
 	public void setHash(String hash) {

@@ -22,7 +22,6 @@ public class ProofOfWorkMiningEngine {
 	private BlockPayloadService blockPayloadService;
 	private TransactionalBlockChainService transactionalBlockChainService;
 	private static final int N_ZEROS = 5;
-	private BlockDistributionService blockDistributionService;
 
 	public static ProofOfWorkMiningEngine initializeFromRepository(BlockChainRepository blockChainRepository,
 																   BlockPayloadService blockPayloadService,
@@ -32,7 +31,6 @@ public class ProofOfWorkMiningEngine {
 		proofOfWorkMiningEngine.setBlockChainRepository(blockChainRepository);
 		proofOfWorkMiningEngine.setIncomeDataService(incomeDataService);
 		proofOfWorkMiningEngine.setBlockPayloadService(blockPayloadService);
-		proofOfWorkMiningEngine.setBlockDistributionService(blockDistributionService);
 		BlockChain blockChain = blockChainRepository.getBlockChain();
 		proofOfWorkMiningEngine.setBlockChain(blockChain);
 		proofOfWorkMiningEngine.setTransactionalBlockChainService(new TransactionalBlockChainService(blockChain,
@@ -50,10 +48,6 @@ public class ProofOfWorkMiningEngine {
 
 	private void setBlockPayloadService(BlockPayloadService blockPayloadService) {
 		this.blockPayloadService = blockPayloadService;
-	}
-
-	public void setBlockDistributionService(BlockDistributionService blockDistributionService) {
-		this.blockDistributionService = blockDistributionService;
 	}
 
 	private void setBlockChain(BlockChain blockChain) {

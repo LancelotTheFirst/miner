@@ -9,6 +9,7 @@ import java.security.*;
 public class Hash {
 
 	private static final Logger logger = LoggerFactory.getLogger(Hash.class);
+	public static final String SHA_256 = "SHA-256";
 	private char[] hexHashChars;
 	private String hashAsString;
 
@@ -23,7 +24,7 @@ public class Hash {
 	private static char[] calculateHash(Block block) throws HashCalculationException {
 		MessageDigest digest;
 		try {
-			digest = MessageDigest.getInstance("SHA-256");
+			digest = MessageDigest.getInstance(SHA_256);
 		} catch (NoSuchAlgorithmException e) {
 			String message = "Really unexpected error in instantiating MessageDigest to calculate hash sum";
 			logger.error(message);
