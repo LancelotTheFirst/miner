@@ -3,21 +3,25 @@ package com.blockchain.miner.infrastructure.income;
 import com.blockchain.miner.domain.block.Block;
 import com.blockchain.miner.domain.income.IncomeDataService;
 import com.blockchain.miner.repository.income.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 
 @Component
-public class IncomeDataServiceImpl implements IncomeDataService {
+public class RepositoryIncomeDataService implements IncomeDataService {
 
-	private IncomeDataRepository incomeDataRepository;
+	private final IncomeDataRepository incomeDataRepository;
+
+	public RepositoryIncomeDataService(IncomeDataRepository incomeDataRepository) {
+		this.incomeDataRepository = incomeDataRepository;
+	}
 
 	@Override
 	public Optional<Block> getIncomeBlock() {
-		List<BlockCreatedDocument> blockEntities = incomeDataRepository.findAll();
-		if (!blockEntities.isEmpty()) {
-			BlockCreatedDocument document = blockEntities.get(0);
+
+		List<BlockCreatedDocument> blockDocuments = incomeDataRepository.findAll();
+		if (!blockDocuments.isEmpty()) {
+			BlockCreatedDocument document = blockDocuments.get(0);
 			Block block = Block.fromIncomeBlock(document.getBlockData(), document.getHash());
 			return Optional.of(block);
 		}
@@ -29,8 +33,4 @@ public class IncomeDataServiceImpl implements IncomeDataService {
 		incomeDataRepository.deleteByHash(block.getHash().asString());
 	}
 
-	@Autowired
-	public void setIncomeDataRepository(IncomeDataRepository incomeDataRepository) {
-		this.incomeDataRepository = incomeDataRepository;
-	}
 }

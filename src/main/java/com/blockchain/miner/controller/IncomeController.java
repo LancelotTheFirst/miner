@@ -2,7 +2,6 @@ package com.blockchain.miner.controller;
 
 import com.blockchain.miner.application.IncomeApplicationService;
 import org.slf4j.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +17,10 @@ public class IncomeController {
 	private static final Logger logger = LoggerFactory.getLogger(IncomeController.class);
 
 	private IncomeApplicationService applicationService;
+
+	public IncomeController(IncomeApplicationService applicationService) {
+		this.applicationService = applicationService;
+	}
 
 	@PostMapping(value = "/blockcreated")
 	public ResponseEntity<HandleBlockCreatedResult> addCreatedBlock(@RequestBody BlockCreatedMessage message) {
@@ -54,8 +57,4 @@ public class IncomeController {
 		}
 	}
 
-	@Autowired
-	public void setApplicationService(IncomeApplicationService applicationService) {
-		this.applicationService = applicationService;
-	}
 }
