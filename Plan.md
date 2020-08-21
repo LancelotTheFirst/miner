@@ -86,10 +86,14 @@
     
         + Develop tests for Hash class.
         
-        - Develop test for IncomeController.
-            
-    - Develop integration tests.
-    
+21.08.2020
+   
+    % Develop integration tests.
+        
+        + Develop test for IncomeController.
+
+    % Develop unit tests.    
+
     - Write good looking readme.
     
         - Draw scheme.
