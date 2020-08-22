@@ -97,6 +97,8 @@
     % Develop integration tests.
     
         + Develop negative test for IncomeController.
+        
+        + Integration test for IncomeApplicationService.
 
     % Develop unit tests.    
 

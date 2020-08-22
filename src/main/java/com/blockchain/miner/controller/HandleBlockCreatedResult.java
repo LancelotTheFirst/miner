@@ -2,8 +2,8 @@ package com.blockchain.miner.controller;
 
 public class HandleBlockCreatedResult {
 
-	private static final String SUCCESS_STATUS = "success";
-	private static final String ERROR_STATUS = "error";
+	public static final String SUCCESS_STATUS = "success";
+	public static final String ERROR_STATUS = "error";
 	public static final String EMPTY = "";
 	private String status;
 	private String message;
