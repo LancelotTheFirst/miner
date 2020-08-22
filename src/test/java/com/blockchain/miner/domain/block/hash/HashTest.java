@@ -49,13 +49,13 @@ class HashTest {
 	}
 
 	private Map<String, String> createBlockPayloadDataMap() {
-		Map<String, String> dataMap = new HashMap<>();
-		dataMap.put("0", "8ddd06d8-118f-47bc-9c3b-ab40d52b2632");
-		dataMap.put("1", "b967c0be-0076-407d-a14d-c9ad8a42afcc");
-		dataMap.put("2", "c1ab914a-2232-407e-b395-40433d55a026");
-		dataMap.put("3", "096aa01a-67be-4f26-ab64-18fa8d3c334b");
-		dataMap.put("4", "050effe6-fd64-4219-8a9f-d3ace7753a16");
-		return dataMap;
+		return new HashMap<>() {{
+			put("0", "8ddd06d8-118f-47bc-9c3b-ab40d52b2632");
+			put("1", "b967c0be-0076-407d-a14d-c9ad8a42afcc");
+			put("2", "c1ab914a-2232-407e-b395-40433d55a026");
+			put("3", "096aa01a-67be-4f26-ab64-18fa8d3c334b");
+			put("4", "050effe6-fd64-4219-8a9f-d3ace7753a16");
+		}};
 	}
 
 	@Test

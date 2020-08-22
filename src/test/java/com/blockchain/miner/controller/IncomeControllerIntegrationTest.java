@@ -19,9 +19,9 @@ import static org.mockito.Mockito.when;
 
 @WebMvcTest(IncomeController.class)
 @ContextConfiguration(classes = ControllerTestContextConfiguration.class)
-class IncomeControllerIT {
+class IncomeControllerIntegrationTest {
 
-	private final static Logger logger = LoggerFactory.getLogger(IncomeControllerIT.class);
+	private final static Logger logger = LoggerFactory.getLogger(IncomeControllerIntegrationTest.class);
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -47,11 +47,11 @@ class IncomeControllerIT {
 	}
 
 	private Map<String, String> createImitationOfBlockDataMap() {
-		Map<String, String> dataMap = new HashMap<>();
-		dataMap.put("0", "8ddd06d8-118f-47bc-9c3b-ab40d52b2632");
-		dataMap.put("1", "b967c0be-0076-407d-a14d-c9ad8a42afcc");
-		dataMap.put("2", "c1ab914a-2232-407e-b395-40433d55a026");
-		return dataMap;
+		return new HashMap<>() {{
+			put("0", "8ddd06d8-118f-47bc-9c3b-ab40d52b2632");
+			put("1", "b967c0be-0076-407d-a14d-c9ad8a42afcc");
+			put("2", "c1ab914a-2232-407e-b395-40433d55a026");
+		}};
 	}
 
 	@Test
