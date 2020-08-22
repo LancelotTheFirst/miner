@@ -54,4 +54,22 @@ class IncomeControllerIT {
 		return dataMap;
 	}
 
+	@Test
+	void forWrongRequestReturnsError() throws Exception {
+		when(applicationService.addIncomeBlock(any())).thenReturn(HandleBlockCreatedResult.success());
+		WrongIncomeBlockCreatedRequestBody requestBody = new WrongIncomeBlockCreatedRequestBody();
+		requestBody.setNodeAddress("address");
+		requestBody.setBlockDataWrongName(createImitationOfBlockDataMap());
+		String jsonMsg = gson.toJson(requestBody);
+
+		logger.info(jsonMsg);
+
+		mockMvc.perform(MockMvcRequestBuilders.post("/income/blockcreated")
+			.contentType("application/json;charset=UTF-8").content(jsonMsg))
+			.andDo(MockMvcResultHandlers.print()).andExpect(MockMvcResultMatchers.status().isBadRequest())
+			.andExpect(MockMvcResultMatchers.content().contentType("application/json"))
+			.andExpect(MockMvcResultMatchers.jsonPath("$.status").value("error"))
+			.andExpect(MockMvcResultMatchers.jsonPath("$.message").isNotEmpty());
+	}
+
 }

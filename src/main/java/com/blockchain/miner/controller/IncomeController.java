@@ -44,13 +44,13 @@ public class IncomeController {
 	private void checkAllRequiredFieldsAreFilled(BlockCreatedMessage message) throws RequiredIncomeDataEmptyException {
 		Collection<String> emptyFieldNames = new ArrayList<>();
 		if (message.getNodeAddress() == null || message.getNodeAddress().isEmpty()) {
-			emptyFieldNames.add("Node Address");
+			emptyFieldNames.add("nodeAddress");
 		}
 		if (message.getBlockData() == null || message.getBlockData().isEmpty()) {
-			emptyFieldNames.add("Block Data");
+			emptyFieldNames.add("blockData");
 		}
 		if (message.getHash() == null || message.getHash().isEmpty()) {
-			emptyFieldNames.add("Hash");
+			emptyFieldNames.add("hash");
 		}
 		if (!emptyFieldNames.isEmpty()) {
 			throw new RequiredIncomeDataEmptyException(emptyFieldNames);

@@ -91,6 +91,12 @@
     % Develop integration tests.
         
         + Develop test for IncomeController.
+                
+22.08.2020        
+
+    % Develop integration tests.
+    
+        + Develop negative test for IncomeController.
 
     % Develop unit tests.    
 
