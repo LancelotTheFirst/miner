@@ -7,7 +7,7 @@
 >
 > В программе реализованы два вида асинхронного взаимодействия - 1) входящие блоки, которые намайнил другой майнер сохраняются в бд (Mongo), затем чтобы ядро - MiningEngine само решало когда приостановить майнинг чтобы проверить нет ли входящих блоков, 2) распространение блоков происходит в событийном формате - как только блок смайнен, он отправляется в очередь, а слушатель тут же запускает отправку по HTTP блока другому майнеру.
 
-![Demo Animation](../miner-assets/MinerVersionOn-30-08-2020.png)
+![Demo Animation](../assets/MinerVersionOn-30-08-2020.png)
 
 > ## Launch instruction
 > To build application and start two interacting miners in docker-containers just run build-and-start-in-docker.sh
