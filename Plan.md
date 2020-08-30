@@ -100,13 +100,21 @@
         
         + Integration test for IncomeApplicationService.
 
-    % Develop unit tests.    
+    % Develop unit tests.
+    
+30.08.2020        
 
-    - Write good looking readme.
+    % Write good looking readme.
+        
+        + Tell the definition of project.
     
         - Draw scheme.
         
-        - Tell the essence of project.
+        - Draw deployment scheme.
+
+    % Develop integration tests.
+    
+    % Develop unit tests.
         
     - Use profiles to choose local or remote launch.
     
