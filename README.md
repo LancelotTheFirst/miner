@@ -32,3 +32,5 @@
 > ## Deployment scheme
 > Deployment consists of four docker-containers: app and mongo containers for each of two miners, so each miner has
 > its own database.
+>
+> ![Demo Animation](../assets/DeploymentScheme.png)
